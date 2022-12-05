@@ -5,6 +5,7 @@ from datetime import datetime
 
 class Field:
     def __init__(self, value) -> None:
+        self._value = None
         self.value = value
 
     def __str__(self):
@@ -15,11 +16,11 @@ class Field:
 
     @property
     def value(self):
-        return self.__value
+        return self._value
 
     @value.setter
     def value(self, value):
-        self.__value = value
+        self._value = value
 
 
 class Name(Field):
@@ -34,14 +35,10 @@ class Phone(Field):
         if not phone:
             raise ValueError
 
-    @property
-    def value(self):
-        return self.__value
-
-    @value.setter
+    @Field.value.setter
     def value(self, value):
         self.verify_phone(value)
-        self.__value = value
+        self._value = value
 
 
 class Birthday(Field):
@@ -53,14 +50,10 @@ class Birthday(Field):
             raise ValueError
         return birthday
 
-    @property
-    def value(self):
-        return self.__value
-
-    @value.setter
+    @Field.value.setter
     def value(self, value):
         self.verify_birthday(value)
-        self.__value = datetime.strptime(value, "%d.%m.%Y").date()
+        self._value = datetime.strptime(value, "%d.%m.%Y").date()
 
 
 class Record:
