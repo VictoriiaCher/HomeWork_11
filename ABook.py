@@ -71,13 +71,24 @@ class Record:
     def __repr__(self):
         return f"{self.name}: {self.phones}, {self.birthday}"
 
-    def add_phone(self, phone):
-        phone = Phone(phone)
-        return self.phones.append(phone)
+    def add_phone(self, new_phone):
+        if not self.phones:
+            self.phones.append(new_phone)
+            return f"Phone '{new_phone}' is added"
+        else:
+            for phone in self.phones:
+                if phone != new_phone:
+                    self.phones.append(new_phone)
+                    return f"Phone '{new_phone}' is added"
+                else:
+                    return f"Phone '{new_phone}' already exist in AddressBook. Try again!"
 
     def add_birthday(self, birthday):
-        self.birthday = Birthday(birthday)
-        return self.birthday
+        if self.birthday:
+            return f"The date of birthday already exist in contact '{self.name}'. Try again!"
+        else:
+            self.birthday = Birthday(birthday)
+            return f"Date of birthday is added to the contact '{self.name}'"
 
     def change_phone(self, old_phone, new_phone):
         for phone in self.phones:
@@ -88,7 +99,7 @@ class Record:
 
     def remove_phone(self, del_phone):
         for phone in self.phones:
-            if phone.value == del_phone:
+            if phone == del_phone:
                 self.phones.remove(phone)
                 return f"Phone '{del_phone}' is delete"
         return f"Phone '{del_phone}' is not in AddressBook. Try again!"
@@ -125,17 +136,17 @@ class ABook(UserDict):
         return f"{self.data}"
 
     def add_record(self, record):
-        if not record.name.value in self.data:
+        if record.name.value not in self.data:
             self.data[record.name.value] = record
             return f"New contact '{record.name.value}' is added"
         else:
             return f"This contact already exist in AddressBook"
 
     def iterator(self, n):
-        name_in_page = list(self.data.keys())
-        if self.count >= len(name_in_page):
+        names_in_page = list(self.data.keys())
+        if self.count >= len(names_in_page):
             raise StopIteration
-        result_list = name_in_page[self.count: min(self.count + n, len(name_in_page))]
+        result_list = names_in_page[self.count: min(self.count + n, len(names_in_page))]
         for i in result_list:
             self.count += 1
         yield result_list

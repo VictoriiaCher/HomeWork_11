@@ -51,6 +51,8 @@ def handle_user_input(user_input: str) -> tuple:
 
 @input_error
 def hello_handler(*args, **kwargs) -> str:
+    """Функція считує з файлу та виводить на екран текст привітання"""
+
     with open('README.txt', "r") as hello:
         for line in hello.readlines():
             print(line, end='')
@@ -77,23 +79,29 @@ def add_record(user_data: list) -> str:
 
 @input_error
 def add_phone(user_data: list) -> str:
-    BOOK[user_data[0]].add_phone(user_data[1])
-    return f"Phone number is added to the contact '{user_data[0]}'"
+    """Функція додає новий номер телефону до обраного контакту"""
+
+    return BOOK[user_data[0]].add_phone(user_data[1])
 
 
 @input_error
 def add_birthday(user_data: list) -> str:
-    BOOK[user_data[0]].add_birthday(user_data[1])
-    return f"Date of birthday is added to the contact '{user_data[0]}'"
+    """Функція додає дату народження контакту"""
+
+    return BOOK[user_data[0]].add_birthday(user_data[1])
 
 
 @input_error
 def change_birthday(user_data: list) -> str:
+    """Функція змінює дату народження контакту"""
+
     return BOOK[user_data[0]].change_birthday(user_data[1])
 
 
 @input_error
 def del_birthday(user_data: list) -> str:
+    """Функція видаляє дату народження контакту"""
+
     return BOOK[user_data[0]].remove_birthday()
 
 
@@ -182,7 +190,7 @@ HANDLER = {
     "show": pagination,
     "del": del_record,
     "phone": show_phone_handler,
-    "e": bye_handler,
+    "exit": bye_handler,
     "close": bye_handler,
     "good": bye_handler,
 }
