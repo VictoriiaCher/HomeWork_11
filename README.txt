@@ -8,7 +8,8 @@ Hi! I'm your bot and i can:
  - del_phone [name phone] -> delete phone contact
  - del_birthday [name] -> delete birthday contact
  - show_all -> show AddressBook
+ - show [n] -> page-by-page input of the AddressBook, n - the number of contacts on one page
  - phone [name] -> show phone by contact name
 To exit, enter any of the commands -> (exit, good bye, close)
-Format of the birthday: DD.MM.YYYYY or D.M.YYYY
-Phone number must contain 10 or 12 digits and start with "+"
+Format of the birthday: DD.MM.YYYYY or D.M.YYYY.
+Phone number must contain 12 start with "+" or 10 digits and start with "0"
